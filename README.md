@@ -2,6 +2,31 @@
 
 Collection of Charts Helm for interactives services
 
+## Générer le fichier `index.yaml`
+
+Afin que le repository soit structuré et reconnu comme un repo Helm, il est nécessaire de créer/mettre à jour le fichier `index.yaml` contenant les charts Helm pour chaque service exposé.
+
+1. Installer PygObject dans un environnement virtuel pour éviter les problèmes de versionning ou de dépendances :
+
+```
+python3 -m venv venv
+source venv/bin/activate
+pip install pygobject
+```
+
+2. Packager chaque helm :
+
+```
+for dir in */ ; do
+  helm package "$dir" --destination docs/
+done
+```
+
+3. Créer le dossier "docs/" contenant l'ensemble
+   `helm repo index docs -- url https://2FromField.github.io/helm-charts-interactive-services/docs`
+
+# Catalogs
+
 ## Jupyter-PySpark (jupyter-pyspark)
 
 **Jupyter-PySpark est un environnement Jupyter Notebook avec PySpark installé. PySpark est l'API Python de Apache Spark, un moteur de traitement de données massives**. Cela permet de travailler avec Big Data et d'utiliser Spark pour exécuter des traitements de données distribués tout en restant dans l'interface conviviale de Jupyter.
